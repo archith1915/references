@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="png" href="./icons/home.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    
+    <h1>HOME - ARCHITH'S REFERENCE LIBRARY</h1>
+
+    <div id="file_list">
+        <input type="text" class="school" id="school_search" placeholder="Search References">
+    </div>
+
+    <div class="footer">
+        <p>&copy; J A Archith</p>
+      </div>
+
+      <div id="loader-container" class="loader-container">
+        <div class="lds-hourglass"></div>
+    </div>
+
+    <script>
+        const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRlrE9VIND2cYNRPkGu3FJ4Ogf20HkW267jVpeEmcrpWNESevmkyoLgCagrcWKWpR_vPCAupZDZmUQG/pub?gid=160352439&output=csv";
+
+        const loc = '../HTML & CSS/';
+    
+        window.onload = function() {
+            fetchAndDisplayLinks(csvUrl);
+        };
+    </script>
+
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+
+</body>
+</html>
