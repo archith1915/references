@@ -17,9 +17,7 @@
     <p>&copy; J A Archith</p>
   </div>
 
-  <div id="loader-container" class="loader-container">
-    <div class="lds-hourglass"></div>
-  </div>
+
   
   <script>
     const urlParams = new URLSearchParams(window.location.search);
@@ -39,48 +37,7 @@
       alert('No PDF file specified.');
     }
 
-    const loader = document.getElementById('loader-container');
-    const loaderHome = document.getElementById('loader-container-home');
-
-    if (loader) {
-      showLoader();
-
-      setTimeout(() => {
-        loader.classList.add('fade-out');
-      }, 2100);
-
-      setTimeout(() => {
-        hideLoader();
-      }, 2500);
-    }
-
-    function showLoader() {
-      loader.style.display = 'flex';
-    }
-
-    function hideLoader() {
-      loader.style.display = 'none';
-    }
-
-    function showLoaderHome() {
-      loaderHome.style.display = 'flex';
-    }
-
-    function hideLoaderHome() {
-      loaderHome.style.display = 'none';
-    }
-
-    if (loaderHome) {
-      showLoaderHome();
-
-      setTimeout(() => {
-        loaderHome.classList.add('fade-out');
-      }, 1200);
-
-      setTimeout(() => {
-        hideLoaderHome();
-      }, 1600);
-    }
+    
   </script>
 
 </body>
