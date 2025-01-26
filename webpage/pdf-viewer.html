@@ -1,44 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PDF Viewer</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="png" href="./icons/pdfviewer.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/@adobe/pdf-embedder@latest/build/pdf-embedder.min.js"></script> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Viewer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="png" href="./icons/pdfviewer.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
-  <div id="pdf-container"></div>
+  <div style="max-width: 100%; overflow: hidden; margin: 0 auto;">
+    <!-- Iframe to load the PDF -->
+    <iframe id="pdfIframe" src="" frameborder="0"></iframe>
+  </div>
 
   <div class="footer">
     <p>&copy; J A Archith</p>
   </div>
 
-
+  <div id="loader-container" class="loader-container">
+    <div class="lds-hourglass"></div>
+</div>
   
   <script>
+    // Get the 'file' query parameter from the URL
     const urlParams = new URLSearchParams(window.location.search);
     const pdfUrl = urlParams.get('file');
 
     if (pdfUrl) {
-      const pdfContainer = document.getElementById('pdf-container');
-
-      pdfEmbedder.embedComponent({
-        url: pdfUrl,
-        container: pdfContainer,
-        cMapUrl: '//cdn.jsdelivr.net/npm/@adobe/pdf-lib@latest/cmaps/', 
-        renderInteractiveForms: true, 
-        height: '100vh' // Set initial height to viewport height for responsiveness
-      });
+      // Set the iframe's src to load the PDF file
+      document.getElementById('pdfIframe').src = pdfUrl;
     } else {
       alert('No PDF file specified.');
     }
 
-    
+    const loader = document.getElementById('loader-container');
+const loaderHome = document.getElementById('loader-container-home');
+
+if (loader) {
+  showLoader();
+
+  setTimeout(() => {
+    loader.classList.add('fade-out'); 
+  }, 2100); 
+
+  setTimeout(() => {
+    hideLoader(); 
+  }, 2500); 
+}
+
+function showLoader() {
+  loader.style.display = 'flex';
+}
+
+function hideLoader() {
+  loader.style.display = 'none';
+}
+
+function showLoaderHome() {
+  loaderHome.style.display = 'flex';
+}
+
+function hideLoaderHome() {
+  loaderHome.style.display = 'none';
+}
+
+if (loaderHome) {
+  showLoaderHome();
+
+  setTimeout(() => {
+    loaderHome.classList.add('fade-out'); 
+  }, 1200); 
+
+  setTimeout(() => {
+    hideLoaderHome(); 
+  }, 1600); 
+}
   </script>
+
+
 
 </body>
 </html>
