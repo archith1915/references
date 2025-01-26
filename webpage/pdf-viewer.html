@@ -7,12 +7,11 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="png" href="./icons/pdfviewer.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@adobe/pdf-embedder@latest/build/pdf-embedder.min.js"></script> 
 </head>
 <body>
 
-  <div style="max-width: 100%; overflow: hidden; margin: 0 auto;">
-    <iframe id="pdfIframe" src="" frameborder="0"></iframe>
-  </div>
+  <div id="pdf-container"></div>
 
   <div class="footer">
     <p>&copy; J A Archith</p>
@@ -23,25 +22,19 @@
   </div>
   
   <script>
-    // Get the 'file' query parameter from the URL
     const urlParams = new URLSearchParams(window.location.search);
     const pdfUrl = urlParams.get('file');
 
     if (pdfUrl) {
-      // Fetch the PDF file using fetch API
-      fetch(pdfUrl)
-        .then(response => response.blob())
-        .then(blob => {
-          // Create an object URL from the PDF blob
-          const pdfBlobUrl = URL.createObjectURL(blob);
+      const pdfContainer = document.getElementById('pdf-container');
 
-          // Set the iframe's src to the object URL
-          document.getElementById('pdfIframe').src = pdfBlobUrl;
-        })
-        .catch(error => {
-          console.error('Error fetching PDF:', error);
-          alert('An error occurred while loading the PDF.');
-        });
+      pdfEmbedder.embedComponent({
+        url: pdfUrl,
+        container: pdfContainer,
+        cMapUrl: '//cdn.jsdelivr.net/npm/@adobe/pdf-lib@latest/cmaps/', 
+        renderInteractiveForms: true, 
+        height: '100vh' // Set initial height to viewport height for responsiveness
+      });
     } else {
       alert('No PDF file specified.');
     }
