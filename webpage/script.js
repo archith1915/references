@@ -19,11 +19,9 @@ function fetchAndDisplayPdfs(csvUrl, loc) {
               const eventAnchor = document.createElement('a');
               const fileUrl = loc + sheetLink; // Path to the PDF file
               
-              // Ensure proper formatting of the PDF URL (especially if it's relative)
-              const pdfUrl = `pdf-viewer.html?file=${encodeURIComponent(fileUrl)}`;
-              
               // Redirect to the PDF viewer page
-              eventAnchor.href = pdfUrl;
+              eventAnchor.href = `pdf-viewer.html?file=${encodeURIComponent(fileUrl)}`; // Passing the PDF URL as query parameter
+
               eventAnchor.textContent = eventName;
 
               eventItem.appendChild(eventAnchor);
