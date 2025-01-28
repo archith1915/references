@@ -1,38 +1,41 @@
 function fetchAndDisplayPdfs(csvUrl, loc) {
-    fetch(csvUrl)
-      .then(response => response.text())
-      .then(csvData => {
-        Papa.parse(csvData, {
-          complete: function(results) {
-            const eventsData = results.data.filter(row => row.length > 0 && row[1] !== ''); 
-  
-            for (let i = 1; i < eventsData.length; i++) { // Start loop from index 1
-              const row = eventsData[i];
-              const eventName = row[1]; 
-  
-              if (eventName.trim() !== '') { 
-                const sheetLink = row[2];
-                const eventItem = document.createElement('li');
-                eventItem.classList.add('school');
-                eventItem.id = `event-${i}`;
-  
-                const eventAnchor = document.createElement('a');
-                const fileUrl = loc + sheetLink; // Path to the PDF file
-                
-                // Redirect to the PDF viewer page
-                eventAnchor.href = `pdf-viewer.html?file=${encodeURIComponent(fileUrl)}`; // Passing the PDF URL as query parameter
-  
-                eventAnchor.textContent = eventName;
-  
-                eventItem.appendChild(eventAnchor);
-                document.getElementById('file_list').appendChild(eventItem);
-              }
+  fetch(csvUrl)
+    .then(response => response.text())
+    .then(csvData => {
+      Papa.parse(csvData, {
+        complete: function(results) {
+          const eventsData = results.data.filter(row => row.length > 0 && row[1] !== ''); 
+
+          for (let i = 1; i < eventsData.length; i++) { // Start loop from index 1
+            const row = eventsData[i];
+            const eventName = row[1]; 
+
+            if (eventName.trim() !== '') { 
+              const sheetLink = row[2];
+              const eventItem = document.createElement('li');
+              eventItem.classList.add('school');
+              eventItem.id = `event-${i}`;
+
+              const eventAnchor = document.createElement('a');
+              const fileUrl = loc + sheetLink; // Path to the PDF file
+              
+              // Ensure proper formatting of the PDF URL (especially if it's relative)
+              const pdfUrl = `pdf-viewer.html?file=${encodeURIComponent(fileUrl)}`;
+              
+              // Redirect to the PDF viewer page
+              eventAnchor.href = pdfUrl;
+              eventAnchor.textContent = eventName;
+
+              eventItem.appendChild(eventAnchor);
+              document.getElementById('file_list').appendChild(eventItem);
             }
           }
-        });
-      })
-      .catch(error => console.error('Error fetching CSV data:', error));
-  }
+        }
+      });
+    })
+    .catch(error => console.error('Error fetching CSV data:', error));
+}
+
   
 
   function fetchAndDisplayLinks(csvUrl) {
