@@ -5,6 +5,7 @@ body {
   margin: 0;
   padding: 20px;
   user-select: none;
+  cursor: url(icons/cursor24.png), auto;
 }
 
 ::-webkit-scrollbar {
@@ -51,6 +52,7 @@ h1 {
   padding: 5px 10px;
   border-radius: 2px;
   transition: background-color 0.2s ease;
+  cursor: url(icons/pointer21.png), auto;
 }
 
 .school a:hover {
@@ -72,6 +74,7 @@ h1 {
   margin-bottom: 4.5vh; /* Adds some spacing between the input box and the links */
   transition: background-color 0.2s ease; /* Smooth transition for hover */
   text-align: center;
+  cursor: url(icons/text21.png), auto;
 }
 
 #school_search:hover {
@@ -162,4 +165,5 @@ iframe {
   width: 100%;
   height: 94vh; /* Full height of the viewport */
   border: none;
+  cursor: url(icons/cursor24.png), auto;
 }

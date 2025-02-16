@@ -34,6 +34,45 @@
         };
     </script>
 
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+  const footerText = document.querySelector(".footer"); // Selects the footer
+  let holdTimer;
+  let isHolding = false;
+
+  if (footerText) {
+      // Function to start hold detection
+      function startHold(event) {
+          event.preventDefault(); // Prevent accidental scrolling issues
+          isHolding = true;
+          holdTimer = setTimeout(function () {
+              if (isHolding) {
+                  window.location.href = "about.html"; // Redirect to about.html
+              }
+          }, 3000); // 3 seconds hold time
+      }
+
+      // Function to cancel hold detection
+      function cancelHold() {
+          isHolding = false;
+          clearTimeout(holdTimer);
+      }
+
+      // Mouse Events (for Laptops & Desktops)
+      footerText.addEventListener("mousedown", startHold);
+      footerText.addEventListener("mouseup", cancelHold);
+      footerText.addEventListener("mouseleave", cancelHold);
+
+      // Touch Events (for Mobile & Tablets)
+      footerText.addEventListener("touchstart", startHold, { passive: false });
+      footerText.addEventListener("touchend", cancelHold);
+      footerText.addEventListener("touchcancel", cancelHold);
+  }
+});
+  </script>
+
+  
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
